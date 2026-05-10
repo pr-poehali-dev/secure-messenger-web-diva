@@ -1,0 +1,29 @@
+{
+  "tests": [
+    {
+      "name": "Регистрация нового пользователя",
+      "method": "POST",
+      "path": "/",
+      "body": {"action": "register", "login": "test_user_diva", "password": "pass1234", "name": "Тестер"},
+      "expectedStatus": 200,
+      "expectedBody": {"success": true},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Вход существующего пользователя",
+      "method": "POST",
+      "path": "/",
+      "body": {"action": "login", "login": "test_user_diva", "password": "pass1234"},
+      "expectedStatus": 200,
+      "expectedBody": {"success": true},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Неверный пароль",
+      "method": "POST",
+      "path": "/",
+      "body": {"action": "login", "login": "test_user_diva", "password": "wrong"},
+      "expectedStatus": 401
+    }
+  ]
+}
