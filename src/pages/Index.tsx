@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 const sections = [
   { id: 'auth', label: 'Авторизация', icon: 'KeyRound' },
@@ -13,7 +15,7 @@ const sections = [
 
 const chats = [
   { name: 'Аня · команда', msg: 'Закинула макет, гляньте 👀', time: '12:04', unread: 3, color: 'from-orange-400 to-pink-500', online: true },
-  { name: 'Космо-чат 🚀', msg: 'Марк: запуск через 5 минут', time: '11:48', unread: 12, color: 'from-violet-500 to-fuchsia-500', online: true },
+  { name: 'Diva-чат ✨', msg: 'Марк: запуск через 5 минут', time: '11:48', unread: 12, color: 'from-violet-500 to-fuchsia-500', online: true },
   { name: 'Лиза', msg: 'Голосовое · 0:42', time: '10:30', unread: 0, color: 'from-amber-400 to-orange-500', online: false },
   { name: 'Папа', msg: 'Перевёл ₽5 000 за билеты', time: 'Вчера', unread: 0, color: 'from-purple-600 to-indigo-600', online: false },
 ];
@@ -27,7 +29,7 @@ const features = [
 ];
 
 const Index = () => {
-  const [active, setActive] = useState('chats');
+  const [authMode, setAuthMode] = useState<'email' | 'phone'>('email');
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden grain">
@@ -42,21 +44,24 @@ const Index = () => {
       <header className="sticky top-0 z-40 backdrop-blur-xl bg-background/70 border-b border-border/50">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="relative w-10 h-10 rounded-2xl bg-brand-ink flex items-center justify-center overflow-hidden">
+            <div className="relative w-10 h-10 rounded-2xl flex items-center justify-center overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-brand-orange to-brand-violet" />
-              <Icon name="MessageSquareDashed" size={20} className="relative text-white" />
+              <Icon name="Sparkles" size={20} className="relative text-white" />
             </div>
-            <span className="font-display text-2xl font-extrabold tracking-tight">orbit<span className="text-brand-orange">.</span></span>
+            <span className="font-display text-2xl font-extrabold tracking-tight">web<span className="text-brand-orange">-</span>Diva</span>
           </div>
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
             <a className="hover:text-brand-orange transition-colors" href="#features">Возможности</a>
             <a className="hover:text-brand-orange transition-colors" href="#app">Приложение</a>
             <a className="hover:text-brand-orange transition-colors" href="#premium">Премиум</a>
+            <a className="hover:text-brand-orange transition-colors" href="#auth">Войти</a>
           </nav>
-          <Button className="rounded-full bg-brand-ink hover:bg-brand-violet text-white px-6 h-11 font-semibold">
-            Скачать
-            <Icon name="ArrowUpRight" size={16} className="ml-1" />
-          </Button>
+          <a href="#auth">
+            <Button className="rounded-full bg-brand-ink hover:bg-brand-violet text-white px-6 h-11 font-semibold">
+              Регистрация
+              <Icon name="ArrowUpRight" size={16} className="ml-1" />
+            </Button>
+          </a>
         </div>
       </header>
 
@@ -85,14 +90,18 @@ const Index = () => {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <Button className="rounded-full h-14 px-8 bg-brand-orange hover:bg-brand-orange/90 text-white text-base font-semibold shadow-lg shadow-brand-orange/30">
-                <Icon name="Apple" size={18} className="mr-2" />
-                Скачать на iOS
-              </Button>
-              <Button variant="outline" className="rounded-full h-14 px-8 border-2 border-brand-ink text-brand-ink hover:bg-brand-ink hover:text-white text-base font-semibold">
-                <Icon name="Smartphone" size={18} className="mr-2" />
-                Android · APK
-              </Button>
+              <a href="#auth">
+                <Button className="rounded-full h-14 px-8 bg-brand-orange hover:bg-brand-orange/90 text-white text-base font-semibold shadow-lg shadow-brand-orange/30">
+                  <Icon name="Mail" size={18} className="mr-2" />
+                  Регистрация по почте
+                </Button>
+              </a>
+              <a href="#auth">
+                <Button variant="outline" className="rounded-full h-14 px-8 border-2 border-brand-ink text-brand-ink hover:bg-brand-ink hover:text-white text-base font-semibold">
+                  <Icon name="Phone" size={18} className="mr-2" />
+                  По номеру телефона
+                </Button>
+              </a>
             </div>
 
             <div className="mt-12 flex items-center gap-6">
@@ -103,7 +112,7 @@ const Index = () => {
               </div>
               <div className="text-sm">
                 <div className="font-bold">2,4 млн человек</div>
-                <div className="text-muted-foreground">уже в орбите</div>
+                <div className="text-muted-foreground">уже в web-Diva</div>
               </div>
             </div>
           </div>
@@ -153,7 +162,6 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-              {/* Floating badges */}
               <div className="absolute -top-4 -left-10 bg-white rounded-2xl shadow-xl p-3 flex items-center gap-2 rotate-[-8deg]">
                 <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center"><Icon name="Phone" size={14} className="text-green-600" /></div>
                 <div className="text-xs"><div className="font-bold">Звонок</div><div className="text-muted-foreground">02:14</div></div>
@@ -219,6 +227,71 @@ const Index = () => {
         </div>
       </section>
 
+      {/* AUTH */}
+      <section id="auth" className="max-w-7xl mx-auto px-6 lg:px-10 pb-24 lg:pb-32">
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <div className="text-sm font-bold tracking-widest uppercase text-brand-orange mb-4">Регистрация</div>
+            <h2 className="font-display font-black text-5xl lg:text-6xl tracking-tight text-balance mb-6">
+              Заходи в <span className="gradient-text italic">web-Diva</span> за минуту
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-md mb-8">Создай аккаунт по электронной почте или номеру телефона. Никаких лишних шагов — всё чисто и просто.</p>
+            <div className="space-y-4">
+              {[
+                { icon: 'Lock', t: 'Сквозное шифрование' },
+                { icon: 'Zap', t: 'Без рекламы и трекеров' },
+                { icon: 'Heart', t: 'Сделано с любовью' },
+              ].map((x, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-brand-orange/10 flex items-center justify-center"><Icon name={x.icon} size={18} className="text-brand-orange" /></div>
+                  <span className="font-semibold">{x.t}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-3xl border border-border p-8 lg:p-10 shadow-xl">
+            <div className="flex gap-2 mb-8 p-1 bg-muted rounded-full">
+              <button onClick={() => setAuthMode('email')} className={`flex-1 h-11 rounded-full text-sm font-semibold transition-all flex items-center justify-center gap-2 ${authMode === 'email' ? 'bg-brand-ink text-white' : 'text-muted-foreground'}`}>
+                <Icon name="Mail" size={16} /> Email
+              </button>
+              <button onClick={() => setAuthMode('phone')} className={`flex-1 h-11 rounded-full text-sm font-semibold transition-all flex items-center justify-center gap-2 ${authMode === 'phone' ? 'bg-brand-ink text-white' : 'text-muted-foreground'}`}>
+                <Icon name="Phone" size={16} /> Телефон
+              </button>
+            </div>
+
+            <div className="space-y-5">
+              <div>
+                <Label className="text-xs font-bold tracking-wider uppercase text-muted-foreground">Имя</Label>
+                <Input className="mt-2 h-12 rounded-2xl border-border" placeholder="Как тебя звать?" />
+              </div>
+              {authMode === 'email' ? (
+                <div>
+                  <Label className="text-xs font-bold tracking-wider uppercase text-muted-foreground">Электронная почта</Label>
+                  <Input type="email" className="mt-2 h-12 rounded-2xl border-border" placeholder="you@web-diva.app" />
+                </div>
+              ) : (
+                <div>
+                  <Label className="text-xs font-bold tracking-wider uppercase text-muted-foreground">Номер телефона</Label>
+                  <Input type="tel" className="mt-2 h-12 rounded-2xl border-border" placeholder="+7 999 000 00 00" />
+                </div>
+              )}
+              <div>
+                <Label className="text-xs font-bold tracking-wider uppercase text-muted-foreground">Пароль</Label>
+                <Input type="password" className="mt-2 h-12 rounded-2xl border-border" placeholder="Минимум 8 символов" />
+              </div>
+              <Button className="w-full h-14 rounded-2xl bg-brand-orange hover:bg-brand-orange/90 text-white text-base font-bold shadow-lg shadow-brand-orange/30">
+                Создать аккаунт
+                <Icon name="ArrowRight" size={18} className="ml-2" />
+              </Button>
+              <div className="text-center text-sm text-muted-foreground">
+                Уже с нами? <a href="#" className="text-brand-violet font-semibold">Войти</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* PREMIUM */}
       <section id="premium" className="max-w-7xl mx-auto px-6 lg:px-10 pb-24 lg:pb-32">
         <div className="relative rounded-[2.5rem] bg-brand-ink text-white p-10 lg:p-16 overflow-hidden">
@@ -228,18 +301,19 @@ const Index = () => {
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur mb-6">
                 <Icon name="Sparkles" size={14} className="text-brand-orange" />
-                <span className="text-xs font-bold tracking-wider uppercase">Orbit Premium</span>
+                <span className="text-xs font-bold tracking-wider uppercase">web-Diva Premium</span>
               </div>
               <h2 className="font-display font-black text-5xl lg:text-7xl tracking-tight text-balance mb-6">
-                Больше орбиты — <span className="gradient-text italic">меньше границ</span>
+                Премиум по цене <span className="gradient-text italic">кофейной крошки</span>
               </h2>
-              <p className="text-white/70 text-lg max-w-md mb-10">4К-видеозвонки, безлимитное облако, эксклюзивные аватарки и кэшбек 5% по всем переводам.</p>
-              <div className="flex items-baseline gap-3 mb-8">
-                <span className="font-display font-black text-6xl">₽299</span>
-                <span className="text-white/60">/ месяц</span>
+              <p className="text-white/70 text-lg max-w-md mb-10">4К-видеозвонки, безлимитное облако, эксклюзивные аватарки и кэшбек 5% по всем переводам — всего за 10 рублей в месяц.</p>
+              <div className="flex items-baseline gap-3 mb-2">
+                <span className="font-display font-black text-7xl lg:text-8xl">₽10</span>
+                <span className="text-white/60 text-lg">/ месяц</span>
               </div>
+              <div className="text-brand-orange text-sm font-bold mb-10">Дешевле любой подписки в мире</div>
               <Button className="rounded-full h-14 px-8 bg-brand-orange hover:bg-brand-orange/90 text-white text-base font-semibold">
-                Попробовать 7 дней бесплатно
+                Подключить за ₽10
                 <Icon name="ArrowRight" size={18} className="ml-2" />
               </Button>
             </div>
@@ -266,15 +340,19 @@ const Index = () => {
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-16">
         <div className="text-center py-16">
           <h2 className="font-display font-black text-5xl lg:text-8xl tracking-tighter text-balance">
-            Поехали в <span className="gradient-text italic">orbit</span>?
+            Готова стать <span className="gradient-text italic">Diva</span>?
           </h2>
           <div className="mt-10 flex flex-wrap gap-4 justify-center">
-            <Button className="rounded-full h-14 px-10 bg-brand-ink text-white hover:bg-brand-violet text-base font-semibold">Создать аккаунт</Button>
-            <Button variant="ghost" className="rounded-full h-14 px-10 text-base font-semibold">Узнать больше →</Button>
+            <a href="#auth">
+              <Button className="rounded-full h-14 px-10 bg-brand-ink text-white hover:bg-brand-violet text-base font-semibold">Создать аккаунт</Button>
+            </a>
+            <a href="#features">
+              <Button variant="ghost" className="rounded-full h-14 px-10 text-base font-semibold">Узнать больше →</Button>
+            </a>
           </div>
         </div>
         <div className="border-t border-border pt-8 flex flex-col md:flex-row gap-4 justify-between items-center text-sm text-muted-foreground">
-          <div>© 2026 orbit. Сделано на Земле, работает в любой галактике.</div>
+          <div>© 2026 web-Diva. Сделано с любовью.</div>
           <div className="flex gap-6">
             <a href="#" className="hover:text-brand-orange">Конфиденциальность</a>
             <a href="#" className="hover:text-brand-orange">Поддержка</a>
